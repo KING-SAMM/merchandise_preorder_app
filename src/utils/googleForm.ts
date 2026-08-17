@@ -1,0 +1,9 @@
+import { googleFormConfig } from '../config/googleForm'; import type { OrderState } from '../types';
+const pairs=(order:OrderState)=>({orderReference:order.orderReference,profileName:order.member.profileName,minerId:order.member.minerId,email:order.member.email,phone:order.member.phone,country:order.member.country,addressLine1:order.member.addressLine1,addressLine2:order.member.addressLine2,city:order.member.city,stateRegion:order.member.stateRegion,postalCode:order.member.postalCode,shirtVariant:order.shirt?.variantId??'',shirtCode:order.shirt?.productCode??'',shirtDesignCode:order.shirt?.designCode??'',shirtColour:order.shirt?.colourScheme??'',shirtSize:order.shirt?.size??'',shirtQuantity:order.shirt?.quantity?.toString()??'',capVariant:order.cap?.variantId??'No Cap',capCode:order.cap?.productCode??'',capDesignCode:order.cap?.designCode??'',capColour:order.cap?.colourScheme??'',capQuantity:order.cap?.quantity?.toString()??''});
+export const missingGoogleConfig=()=>{ const f=googleFormConfig.fields; return !googleFormConfig.formUrl?['form URL']:Object.entries(f).filter(([k,v])=>!v&&['orderReference','profileName','minerId'].includes(k)).map(([k])=>k); };
+export const buildGoogleFormUrl=(order:OrderState)=>{ const values=pairs(order); const params=new URLSearchParams(); for(const [key,value] of Object.entries(values)){ const field=googleFormConfig.fields[key as keyof typeof googleFormConfig.fields]; if(field) params.set(`entry.${field.replace(/^entry\./,'')}`,value); } return `${googleFormConfig.formUrl}${googleFormConfig.formUrl.includes('?')?'&':'?'}${params.toString()}`; };
+
+
+// Replce feild definition in last function above with originl code (below) after providing actual form field 
+
+// const field=googleFormConfig.fields[key as keyof typeof googleFormConfig.fields];
