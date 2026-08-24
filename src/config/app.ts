@@ -1,1 +1,1 @@
-export const appConfig = { googleFormsTestMode: true, eventName: 'Global Community Gathering 2026' };
+export const appConfig = { googleFormsTestMode: true, eventName: 'CTC 2nd Year Anniversary' };

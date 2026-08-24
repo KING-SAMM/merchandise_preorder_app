@@ -1,3 +1,3 @@
 import type { ClothingSize, ProductType } from '../types';
-export const merchandisePricing:Record<ProductType,Record<string,number>>={'t-shirt':{S:7000,M:7000,L:7000,XL:9000,XXL:9000},'corporate-shirt':{S:7000,M:7000,L:7000,XL:9000,XXL:9000},hoodie:{S:13000,M:13000,L:13000,XL:15000,XXL:15000},cap:{standard:3000}};
+export const merchandisePricing:Record<ProductType,Record<string,number>>={'t-shirt':{S:7000,M:7000,L:7000,XL:8000,XXL:9000},'corporate-shirt':{S:7000,M:7000,L:7000,XL:14000,XXL:9000},hoodie:{S:13000,M:13000,L:13000,XL:13000,XXL:15000},cap:{standard:3000}};
 export const unitPrice=(type:ProductType,size:ClothingSize|null)=>type==='cap'?merchandisePricing.cap.standard:merchandisePricing[type][size??'M']; export const formatNaira=(amount:number)=>new Intl.NumberFormat('en-NG',{style:'currency',currency:'NGN',maximumFractionDigits:0}).format(amount).replace('NGN','₦').replace(/\s/g,'');
